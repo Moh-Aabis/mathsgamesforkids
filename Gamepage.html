@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz Game</title>
+</head>
+<body>
+    <h1>Welcome to the Math Quiz Game!</h1>
+    <button onclick="startGame()">Start Game</button>
+
+    <script>
+        let questions = 0;
+        let lvlFails = 0;
+        let score = 0;
+        let s2 = 0;
+        let s3 = 0;
+        let currentLevel = 1;
+
+        function startGame() {
+            const name = prompt("Hi, what's your name?");
+            if (name) {
+                alert(`Try to answer these questions correctly, ${name}`);
+                askQuestion(name);
+            }
+        }
+
+        function askQuestion(name) {
+            const a = Math.floor(Math.random() * (98 - 2 + 1)) + 2;
+            const b = Math.floor(Math.random() * (9 - 2 + 1)) + 2;
+            const answer = parseInt(prompt(`What is the answer of ${a} x ${b}, ${name}?`));
+            const product = a * b;
+
+            if (answer === product) {
+                alert(`That is correct, ${name}`);
+                score++;
+                alert(`Score: ${score}`);
+            } else {
+                alert(`I am sorry, ${answer} is wrong, ${name}\n${a} times ${b} is ${product}`);
+                alert(`Score: ${score}`);
+            }
+
+            questions++;
+
+            if (questions < 8) {
+                askQuestion(name);
+            } else if (questions === 8 && score === 8) {
+                alert(`You are in level 2 now. Congrats, ${name}!\nYour score = ${score}`);
+            } else {
+                alert(`Sorry, ${name}, you didn't pass this level. Your score was ${score}`);
+                lvlFails++;
+                questions = 0;
+                score = 0;
+            }
+        }
+    </script>
+</body>
+</html>
